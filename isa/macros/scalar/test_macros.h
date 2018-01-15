@@ -514,6 +514,143 @@ test_ ## testnum: \
   .double result; \
   .popsection
 
+
+#-----------------------------------------------------------------------
+# RV64UH MACROS
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+# Tests half-precision floating-point instructions
+#-----------------------------------------------------------------------
+
+#define TEST_FP_OP_H_INTERNAL( testnum, flags, result, val1, val2, val3, code... ) \
+test_ ## testnum: \
+  li  TESTNUM, testnum; \
+  la  a0, test_ ## testnum ## _data ;\
+  flh h0, 0(a0); \
+  flh h1, 8(a0); \
+  flh h2, 16(a0); \
+  ld  a3, 24(a0); \
+  code; \
+  fsflags a1, x0; \
+  li a2, flags; \
+  bne a0, a3, fail; \
+  bne a1, a2, fail; \
+  .pushsection .data; \
+  .align 3; \
+  test_ ## testnum ## _data: \
+  .int64 val1; \
+  .int64 val2; \
+  .int64 val3; \
+  .result; \
+  .popsection
+
+#define TEST_FP_HFP_OP_S_H_INTERNAL( testnum, flags, result, val1, val2, val3, code... ) \
+test_ ## testnum: \
+  li  TESTNUM, testnum; \
+  la  a0, test_ ## testnum ## _data ;\
+  flh f0, 0(a0); \
+  flh f1, 8(a0); \
+  flh f2, 16(a0); \
+  ld  a3, 24(a0); \
+  code; \
+  fsflags a1, x0; \
+  li a2, flags; \
+  bne a0, a3, fail; \
+  bne a1, a2, fail; \
+  .pushsection .data; \
+  .align 2; \
+  test_ ## testnum ## _data: \
+  .float val1; \
+  .float val2; \
+  .float val3; \
+  .result; \
+  .popsection
+
+#define TEST_FP_HFP_OP_D_H_INTERNAL( testnum, flags, result, val1, val2, val3, code... ) \
+test_ ## testnum: \
+  li  TESTNUM, testnum; \
+  la  a0, test_ ## testnum ## _data ;\
+  flh f0, 0(a0); \
+  flh f1, 8(a0); \
+  flh f2, 16(a0); \
+  ld  a3, 24(a0); \
+  code; \
+  fsflags a1, x0; \
+  li a2, flags; \
+  bne a0, a3, fail; \
+  bne a1, a2, fail; \
+  .pushsection .data; \
+  .align 3; \
+  test_ ## testnum ## _data: \
+  .double val1; \
+  .double val2; \
+  .double val3; \
+  .result; \
+  .popsection
+
+
+
+#define TEST_FCVT_S_H( testnum, result, val1 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, 0, int64 result, val1, 0.0, 0.0, \
+                    fcvt.s.h f3, h0; fcvt.h.s h3, f3; fmv.x.h a0, h3)
+
+#define TEST_FCVT_H_S( testnum, result, val1 ) \
+  TEST_FP_HFP_OP_S_H_INTERNAL( testnum, 0, float result, val1, 0.0, 0.0, \
+                    fcvt.h.s h3, f0; fcvt.s.h f3, h3; fmv.x.s a0, f3)
+
+#define TEST_FCVT_D_H( testnum, result, val1 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, 0, int64 result, val1, 0.0, 0.0, \
+                    fcvt.d.h f3, h0; fcvt.h.d h3, f3; fmv.x.h a0, h3)
+
+#define TEST_FCVT_H_D( testnum, result, val1 ) \
+  TEST_FP_HFP_OP_D_H_INTERNAL( testnum, 0, double result, val1, 0.0, 0.0, \
+                    fcvt.h.d h3, f0; fcvt.d.h f3, h3; fmv.x.d a0, f3)
+
+#define TEST_FP_OP1_H( testnum, inst, flags, result, val1 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, flags, int64 result, val1, 0.0, 0.0, \
+                    inst h3, h0; fmv.x.h a0, h3)
+
+#define TEST_FP_OP1_H_DWORD_RESULT( testnum, inst, flags, result, val1 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, flags, dword result, val1, 0.0, 0.0, \
+                    inst h3, h0; fmv.x.h a0, h3)
+
+#define TEST_FP_OP2_H( testnum, inst, flags, result, val1, val2 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, flags, int64 result, val1, val2, 0.0, \
+                    inst h3, h0, h1; fmv.x.h a0, h3)
+
+#define TEST_FP_OP3_H( testnum, inst, flags, result, val1, val2, val3 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, flags, int64 result, val1, val2, val3, \
+                    inst h3, h0, h1, h2; fmv.x.h a0, h3)
+
+#define TEST_FP_INT_OP_H( testnum, inst, flags, result, val1, rm ) \
+  TEST_FP_OP_H_INTERNAL( testnum, flags, dword result, val1, 0.0, 0.0, \
+                    inst a0, h0, rm)
+
+#define TEST_FP_CMP_OP_H( testnum, inst, result, val1, val2 ) \
+  TEST_FP_OP_H_INTERNAL( testnum, 0, dword result, val1, val2, 0.0, \
+                    inst a0, h0, h1)
+
+#define TEST_FCLASS_H(testnum, correct, input) \
+  TEST_CASE(testnum, a0, correct, li a0, input; fmv.h.x ha0, a0; \
+                    fclass.h a0, ha0)
+
+#define TEST_INT_HFP_OP( testnum, inst, result, val1 ) \
+test_ ## testnum: \
+  li  TESTNUM, testnum; \
+  la  a0, test_ ## testnum ## _data ;\
+  lh  a3, 0(a0); \
+  li  a0, val1; \
+  inst h0, a0; \
+  fsflags x0; \
+  fmv.x.h a0, h0; \
+  bne a0, a3, fail; \
+  .pushsection .data; \
+  .align 3; \
+  test_ ## testnum ## _data: \
+  .int64 result; \
+  .popsection
+
 #-----------------------------------------------------------------------
 # Pass and fail code (assumes test num is in TESTNUM)
 #-----------------------------------------------------------------------
