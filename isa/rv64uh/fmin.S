@@ -10,26 +10,28 @@
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV64UF
+RVTEST_RV64UH
 RVTEST_CODE_BEGIN
 
   #-------------------------------------------------------------
   # Arithmetic tests
   #-------------------------------------------------------------
 
-  TEST_FP_OP2_S( 2,  fmin.s, 0,        1.0,        2.5,        1.0 );
-  TEST_FP_OP2_S( 3,  fmin.s, 0,    -1235.1,    -1235.1,        1.1 );
-  TEST_FP_OP2_S( 4,  fmin.s, 0,    -1235.1,        1.1,    -1235.1 );
-  TEST_FP_OP2_S( 5,  fmin.s, 0,    -1235.1,        NaN,    -1235.1 );
-  TEST_FP_OP2_S( 6,  fmin.s, 0, 0.00000001, 3.14159265, 0.00000001 );
-  TEST_FP_OP2_S( 7,  fmin.s, 0,       -2.0,       -1.0,       -2.0 );
+  # TEST_FP_OP2_H( 2,  fmin.h, 0,        1.0,        2.5,        1.0 );
+    TEST_FP_OP2_H( 2,  fmin.h, 0,      15360,      16640,      15360 );
+  # TEST_FP_OP2_H( 3,  fmin.h, 0,    -1235.1,    -1235.1,        1.1 );
+  # TEST_FP_OP2_H( 4,  fmin.h, 0,    -1235.1,        1.1,    -1235.1 );
+  # TEST_FP_OP2_H( 5,  fmin.h, 0,    -1235.1,        NaN,    -1235.1 );
+  # TEST_FP_OP2_H( 6,  fmin.h, 0, 0.00000001, 3.14159265, 0.00000001 );
+  # TEST_FP_OP2_H( 7,  fmin.h, 0,       -2.0,       -1.0,       -2.0 );
 
-  TEST_FP_OP2_S(12,  fmax.s, 0,        2.5,        2.5,        1.0 );
-  TEST_FP_OP2_S(13,  fmax.s, 0,        1.1,    -1235.1,        1.1 );
-  TEST_FP_OP2_S(14,  fmax.s, 0,        1.1,        1.1,    -1235.1 );
-  TEST_FP_OP2_S(15,  fmax.s, 0,    -1235.1,        NaN,    -1235.1 );
-  TEST_FP_OP2_S(16,  fmax.s, 0, 3.14159265, 3.14159265, 0.00000001 );
-  TEST_FP_OP2_S(17,  fmax.s, 0,       -1.0,       -1.0,       -2.0 );
+  # TEST_FP_OP2_H(12,  fmax.h, 0,        2.5,        2.5,        1.0 );
+    TEST_FP_OP2_H(12,  fmax.h, 0,      16640,      16640,      15360 );
+  # TEST_FP_OP2_H(13,  fmax.h, 0,        1.1,    -1235.1,        1.1 );
+  # TEST_FP_OP2_H(14,  fmax.h, 0,        1.1,        1.1,    -1235.1 );
+  # TEST_FP_OP2_H(15,  fmax.h, 0,    -1235.1,        NaN,    -1235.1 );
+  # TEST_FP_OP2_H(16,  fmax.h, 0, 3.14159265, 3.14159265, 0.00000001 );
+  # TEST_FP_OP2_H(17,  fmax.h, 0,       -1.0,       -1.0,       -2.0 );
 
   TEST_PASSFAIL
 

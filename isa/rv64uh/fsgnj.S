@@ -10,27 +10,33 @@
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV64UF
+RVTEST_RV64UH
 RVTEST_CODE_BEGIN
 
   #-------------------------------------------------------------
   # Arithmetic tests
   #-------------------------------------------------------------
 
-  TEST_FP_OP2_S( 2,  fsgnj.s, 0, -6.3,  6.3, -1.0 );
-  TEST_FP_OP2_S( 3,  fsgnj.s, 0,  7.3,  7.3,  2.0 );
-  TEST_FP_OP2_S( 4,  fsgnj.s, 0, -8.3, -8.3, -3.0 );
-  TEST_FP_OP2_S( 5,  fsgnj.s, 0,  9.3, -9.3,  4.0 );
+  # TEST_FP_OP2_H( 2,  fsgnj.h, 0,  -6.3,   6.3,   -1.0 );
+  # TEST_FP_OP2_H( 2,  fsgnj.h, 0,  -2.5,   2.5,   -1.0 );
+    TEST_FP_OP2_H( 2,  fsgnj.h, 0, 49408, 16640,  48128 );
+  # TEST_FP_OP2_H( 3,  fsgnj.h, 0,   7.3,   7.3,    2.0 );
+  # TEST_FP_OP2_H( 4,  fsgnj.h, 0,  -8.3,  -8.3,   -3.0 );
+  # TEST_FP_OP2_H( 5,  fsgnj.h, 0,   9.3,  -9.3,    4.0 );
 
-  TEST_FP_OP2_S(12, fsgnjn.s, 0,  6.3,  6.3, -1.0 );
-  TEST_FP_OP2_S(13, fsgnjn.s, 0, -7.3,  7.3,  2.0 );
-  TEST_FP_OP2_S(14, fsgnjn.s, 0,  8.3, -8.3, -3.0 );
-  TEST_FP_OP2_S(15, fsgnjn.s, 0, -9.3, -9.3,  4.0 );
+  # TEST_FP_OP2_H(12, fsgnjn.h, 0,   6.3,   6.3,   -1.0 );
+  # TEST_FP_OP2_H(12, fsgnjn.h, 0,   2.5,   2.5,   -1.0 );
+    TEST_FP_OP2_H(12, fsgnjn.h, 0, 16640, 16640,  48128 );
+  # TEST_FP_OP2_H(13, fsgnjn.h, 0,  -7.3,   7.3,    2.0 );
+  # TEST_FP_OP2_H(14, fsgnjn.h, 0,   8.3,  -8.3,   -3.0 );
+  # TEST_FP_OP2_H(15, fsgnjn.h, 0,  -9.3,  -9.3,    4.0 );
 
-  TEST_FP_OP2_S(22, fsgnjx.s, 0, -6.3,  6.3, -1.0 );
-  TEST_FP_OP2_S(23, fsgnjx.s, 0,  7.3,  7.3,  2.0 );
-  TEST_FP_OP2_S(24, fsgnjx.s, 0,  8.3, -8.3, -3.0 );
-  TEST_FP_OP2_S(25, fsgnjx.s, 0, -9.3, -9.3,  4.0 );
+  # TEST_FP_OP2_H(22, fsgnjx.h, 0,  -6.3,   6.3,   -1.0 );
+  # TEST_FP_OP2_H(22, fsgnjx.h, 0,  -2.5,   2.5,   -1.0 );
+    TEST_FP_OP2_H(22, fsgnjx.h, 0, 49408, 16640,  48128 );
+  # TEST_FP_OP2_H(23, fsgnjx.h, 0,   7.3,   7.3,    2.0 );
+  # TEST_FP_OP2_H(24, fsgnjx.h, 0,   8.3,  -8.3,   -3.0 );
+  # TEST_FP_OP2_H(25, fsgnjx.h, 0,  -9.3,  -9.3,    4.0 );
 
   TEST_PASSFAIL
 

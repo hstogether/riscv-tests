@@ -3,7 +3,7 @@
 #-----------------------------------------------------------------------
 
 rv64uh_sc_tests = \
-	fadd
+	fadd fdiv fmadd fmin fsgnj
 #	fadd fdiv fclass fcmp fcvt fcvt_w fmadd fmin fsgnj \
 #	ldst move recoding \
 
