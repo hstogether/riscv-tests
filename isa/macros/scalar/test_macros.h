@@ -537,7 +537,7 @@ test_ ## testnum: \
   bne a0, a3, fail; \
   bne a1, a2, fail; \
   .pushsection .data; \
-  .align 3; \
+  .align 2; \
   test_ ## testnum ## _data: \
   .int val1; \
   .int val2; \
@@ -549,10 +549,10 @@ test_ ## testnum: \
 test_ ## testnum: \
   li  TESTNUM, testnum; \
   la  a0, test_ ## testnum ## _data ;\
-  flh f0, 0(a0); \
-  flh f1, 8(a0); \
-  flh f2, 16(a0); \
-  ld  a3, 24(a0); \
+  flh h0, 0(a0); \
+  flh h1, 4(a0); \
+  flh h2, 8(a0); \
+  lw  a3, 12(a0); \
   code; \
   fsflags a1, x0; \
   li a2, flags; \
@@ -561,9 +561,9 @@ test_ ## testnum: \
   .pushsection .data; \
   .align 2; \
   test_ ## testnum ## _data: \
-  .float val1; \
-  .float val2; \
-  .float val3; \
+  .int val1; \
+  .int val2; \
+  .int val3; \
   .result; \
   .popsection
 
@@ -591,20 +591,20 @@ test_ ## testnum: \
 
 
 
+#define TEST_FCVT_H_S( testnum, result, val1 ) \
+  TEST_FP_OP_S_INTERNAL( testnum, 0, float result, val1, 0, 0, \
+                    fcvt.h.s h0, f0; fcvt.s.h f3, h0; fmv.x.s a0, f3)
+
 #define TEST_FCVT_S_H( testnum, result, val1 ) \
   TEST_FP_OP_H_INTERNAL( testnum, 0, int result, val1, 0, 0, \
-                    fcvt.s.h f3, h0; fcvt.h.s h3, f3; fmv.x.h a0, h3)
-
-#define TEST_FCVT_H_S( testnum, result, val1 ) \
-  TEST_FP_HFP_OP_S_H_INTERNAL( testnum, 0, float result, val1, 0, 0, \
-                    fcvt.h.s h3, f0; fcvt.s.h f3, h3; fmv.x.s a0, f3)
+                    fcvt.s.h f0, h0; fcvt.h.s h3, f0; fmv.x.h a0, h3)
 
 #define TEST_FCVT_D_H( testnum, result, val1 ) \
   TEST_FP_OP_H_INTERNAL( testnum, 0, int result, val1, 0, 0, \
                     fcvt.d.h f3, h0; fcvt.h.d h3, f3; fmv.x.h a0, h3)
 
 #define TEST_FCVT_H_D( testnum, result, val1 ) \
-  TEST_FP_HFP_OP_D_H_INTERNAL( testnum, 0, double result, val1, 0, 0, \
+  TEST_FP_OP_D_INTERNAL( testnum, 0, double result, val1, 0, 0, \
                     fcvt.h.d h3, f0; fcvt.d.h f3, h3; fmv.x.d a0, f3)
 
 #define TEST_FP_OP1_H( testnum, inst, flags, result, val1 ) \
@@ -635,7 +635,7 @@ test_ ## testnum: \
   TEST_CASE(testnum, a0, correct, li a0, input; fmv.h.x ha0, a0; \
                     fclass.h a0, ha0)
 
-#define TEST_INT_HFP_OP( testnum, inst, result, val1 ) \
+#define TEST_INT_FP_OP_H( testnum, inst, result, val1 ) \
 test_ ## testnum: \
   li  TESTNUM, testnum; \
   la  a0, test_ ## testnum ## _data ;\
@@ -646,9 +646,8 @@ test_ ## testnum: \
   fmv.x.h a0, h0; \
   bne a0, a3, fail; \
   .pushsection .data; \
-  .align -11; \
+  .align 2; \
   test_ ## testnum ## _data: \
-  .int result; \
   .int result; \
   .popsection
 

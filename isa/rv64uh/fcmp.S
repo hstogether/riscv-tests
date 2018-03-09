@@ -10,20 +10,28 @@
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV64UF
+RVTEST_RV64UH
 RVTEST_CODE_BEGIN
 
   #-------------------------------------------------------------
   # Arithmetic tests
   #-------------------------------------------------------------
 
-  TEST_FP_CMP_OP_S( 2, feq.s, 1, -1.36, -1.36)
-  TEST_FP_CMP_OP_S( 3, fle.s, 1, -1.36, -1.36)
-  TEST_FP_CMP_OP_S( 4, flt.s, 0, -1.36, -1.36)
+  # TEST_FP_CMP_OP_S( 2, feq.s, 1, -1.36, -1.36)
+  # TEST_FP_CMP_OP_S( 3, fle.s, 1, -1.36, -1.36)
+  # TEST_FP_CMP_OP_S( 4, flt.s, 0, -1.36, -1.36)
 
-  TEST_FP_CMP_OP_S( 5, feq.s, 0, -1.37, -1.36)
-  TEST_FP_CMP_OP_S( 6, fle.s, 1, -1.37, -1.36)
-  TEST_FP_CMP_OP_S( 7, flt.s, 1, -1.37, -1.36)
+  # TEST_FP_CMP_OP_S( 5, feq.s, 0, -1.37, -1.36)
+  # TEST_FP_CMP_OP_S( 6, fle.s, 1, -1.37, -1.36)
+  # TEST_FP_CMP_OP_S( 7, flt.s, 1, -1.37, -1.36)
+  
+  TEST_FP_CMP_OP_H(2, feq.h, 1, 49920, 49920)
+  TEST_FP_CMP_OP_H(3, fle.h, 1, 49920, 49920)
+  TEST_FP_CMP_OP_H(4, flt.h, 0, 49920, 49920)
+  
+  TEST_FP_CMP_OP_H(5, feq.h, 0, 49920, 49408)
+  TEST_FP_CMP_OP_H(6, fle.h, 1, 49920, 49408)
+  TEST_FP_CMP_OP_H(7, flt.h, 1, 49920, 49408)
 
   TEST_PASSFAIL
 

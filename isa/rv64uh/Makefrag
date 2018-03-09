@@ -3,9 +3,8 @@
 #-----------------------------------------------------------------------
 
 rv64uh_sc_tests = \
-	fadd fdiv fmadd fmin fsgnj
-#	fadd fdiv fclass fcmp fcvt fcvt_w fmadd fmin fsgnj \
-#	ldst move recoding \
+	fadd fdiv fclass fcmp fcvt fcvt_w fmadd fmin fsgnj \
+	ldst move recoding \
 
 rv64uh_p_tests = $(addprefix rv64uh-p-, $(rv64uh_sc_tests))
 rv64uh_v_tests = $(addprefix rv64uh-v-, $(rv64uh_sc_tests))

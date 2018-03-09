@@ -13,7 +13,7 @@
 #include "riscv_test.h"
 #include "test_macros.h"
 
-RVTEST_RV64UF
+RVTEST_RV64UH
 RVTEST_CODE_BEGIN
 
   # Make sure infinities with different mantissas compare as equal.
