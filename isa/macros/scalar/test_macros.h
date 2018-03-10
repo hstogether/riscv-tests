@@ -635,16 +635,18 @@ test_ ## testnum: \
   TEST_CASE(testnum, a0, correct, li a0, input; fmv.h.x ha0, a0; \
                     fclass.h a0, ha0)
 
-#define TEST_INT_FP_OP_H( testnum, inst, result, val1 ) \
+#define TEST_INT_FP_OP_H( testnum, flags, inst, result, val1 ) \
 test_ ## testnum: \
   li  TESTNUM, testnum; \
   la  a0, test_ ## testnum ## _data ;\
   lh  a3, 0(a0); \
   li  a0, val1; \
   inst h0, a0; \
-  fsflags x0; \
+  fsflags a1, x0; \
+  li a2, flags; \
   fmv.x.h a0, h0; \
   bne a0, a3, fail; \
+  bne a1, a2, fail; \
   .pushsection .data; \
   .align 2; \
   test_ ## testnum ## _data: \
