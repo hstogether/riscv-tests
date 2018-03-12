@@ -640,13 +640,13 @@ test_ ## testnum: \
   li  TESTNUM, testnum; \
   la  a0, test_ ## testnum ## _data ;\
   lh  a3, 0(a0); \
-  li  a0, val1; \
+  li  a2, val1; \
   inst h0, a0; \
   fsflags a1, x0; \
-  li a2, flags; \
-  fmv.x.h a0, h0; \
-  bne a0, a3, fail; \
-  bne a1, a2, fail; \
+  li a4, flags; \
+  fmv.x.h a5, h0; \
+  bne a5, a3, fail; \
+  bne a1, a4, fail; \
   .pushsection .data; \
   .align 2; \
   test_ ## testnum ## _data: \
