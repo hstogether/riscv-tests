@@ -641,7 +641,7 @@ test_ ## testnum: \
   la  a0, test_ ## testnum ## _data ;\
   lh  a3, 0(a0); \
   li  a2, val1; \
-  inst h0, a3; \
+  inst h0, a2; \
   fsflags a1, x0; \
   li a4, flags; \
   fmv.x.h a5, h0; \

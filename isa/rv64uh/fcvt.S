@@ -25,7 +25,7 @@ RVTEST_CODE_BEGIN
   # TEST_INT_FP_OP_S( 4,     fcvt.s.wu,                   2.0,  2);
     TEST_INT_FP_OP_H( 4,  0, fcvt.h.wu,                 16384,  2);
   # TEST_INT_FP_OP_S( 5,     fcvt.s.wu,           4.2949673e9, -2);
-    TEST_INT_FP_OP_H( 5,  1, fcvt.h.wu,                 64512, -2);
+    TEST_INT_FP_OP_H( 5,  1, fcvt.h.wu,                 49152, -2);
 
 #if __riscv_xlen >= 64
   # TEST_INT_FP_OP_S( 6,     fcvt.s.l,                   2.0,  2);
