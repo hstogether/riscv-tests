@@ -20,22 +20,30 @@ RVTEST_CODE_BEGIN
   # TEST_FP_OP3_H( 2,  fmadd.h, 0,                 3.5,     1.0,        2.5,        1.0 );
     TEST_FP_OP3_H( 2,  fmadd.h, 0,               17152,   15360,      16640,      15360 );
   # TEST_FP_OP3_H( 3,  fmadd.h, 1,              1236.2,    -1.0,    -1235.1,        1.1 );
+    TEST_FP_OP3_H( 3,  fmadd.h, 1,               16896,   16383,      15361,      15360 );
   # TEST_FP_OP3_H( 4,  fmadd.h, 0,               -12.0,     2.0,       -5.0,       -2.0 );
+    TEST_FP_OP3_H( 4,  fmadd.h, 0,               51712,   16384,      50432,      49152 );
 
   # TEST_FP_OP3_H( 5, fnmadd.h, 0,                -3.5,     1.0,        2.5,        1.0 );
     TEST_FP_OP3_H( 5, fnmadd.h, 0,               49920,   15360,      16640,      15360 );
   # TEST_FP_OP3_H( 6, fnmadd.h, 1,             -1236.2,    -1.0,    -1235.1,        1.1 );
+    TEST_FP_OP3_H( 6, fnmadd.h, 1,               49664,   16383,      15361,      15360 );
   # TEST_FP_OP3_H( 7, fnmadd.h, 0,                12.0,     2.0,       -5.0,       -2.0 );
+    TEST_FP_OP3_H( 7, fnmadd.h, 0,               18944,   16384,      50432,      49152 );
 
   # TEST_FP_OP3_H( 8,  fmsub.h, 0,                 1.5,     1.0,        2.5,        1.0 );
     TEST_FP_OP3_H( 8,  fmsub.h, 0,               15872,   15360,      16640,      15360 );
   # TEST_FP_OP3_H( 9,  fmsub.h, 1,                1234,    -1.0,    -1235.1,        1.1 );
+    TEST_FP_OP3_H( 9,  fmsub.h, 1,               15361,   16383,      15361,      15360 ); # result is rm to 15361
   # TEST_FP_OP3_H(10,  fmsub.h, 0,                -8.0,     2.0,       -5.0,       -2.0 );
+    TEST_FP_OP3_H(10,  fmsub.h, 0,               51200,   16384,      50432,      49152 );
 
   # TEST_FP_OP3_H(11, fnmsub.h, 0,                -1.5,     1.0,        2.5,        1.0 );
     TEST_FP_OP3_H(11, fnmsub.h, 0,               48640,   15360,      16640,      15360 );
   # TEST_FP_OP3_H(12, fnmsub.h, 1,               -1234,    -1.0,    -1235.1,        1.1 );
+    TEST_FP_OP3_H(12, fnmsub.h, 1,               48129,   16383,      15361,      15360 ); # result is rm to 48129 
   # TEST_FP_OP3_H(13, fnmsub.h, 0,                 8.0,     2.0,       -5.0,       -2.0 );
+    TEST_FP_OP3_H(13, fnmsub.h, 0,               18432,   16384,      50432,      49152 );
 
   TEST_PASSFAIL
 
