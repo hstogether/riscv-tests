@@ -528,21 +528,25 @@ test_ ## testnum: \
   li  TESTNUM, testnum; \
   la  a0, test_ ## testnum ## _data ;\
   flh h0, 0(a0); \
-  flh h1, 4(a0); \
-  flh h2, 8(a0); \
-  lh  a3, 12(a0); \
+  flh h1, 8(a0); \
+  flh h2, 16(a0); \
+  lh  a3, 24(a0); \
   code; \
   fsflags a1, x0; \
   li a2, flags; \
   bne a0, a3, fail; \
   bne a1, a2, fail; \
   .pushsection .data; \
-  .align 2; \
+  .align 3; \
   test_ ## testnum ## _data: \
   .int val1; \
+  .int 0;\
   .int val2; \
+  .int 0;\
   .int val3; \
+  .int 0;\
   .result; \
+  .int 0;\
   .popsection
 
 #define TEST_FP_HFP_OP_S_H_INTERNAL( testnum, flags, result, val1, val2, val3, code... ) \
@@ -550,21 +554,25 @@ test_ ## testnum: \
   li  TESTNUM, testnum; \
   la  a0, test_ ## testnum ## _data ;\
   flh h0, 0(a0); \
-  flh h1, 4(a0); \
-  flh h2, 8(a0); \
-  lw  a3, 12(a0); \
+  flh h1, 8(a0); \
+  flh h2, 16(a0); \
+  lw  a3, 24(a0); \
   code; \
   fsflags a1, x0; \
   li a2, flags; \
   bne a0, a3, fail; \
   bne a1, a2, fail; \
   .pushsection .data; \
-  .align 2; \
+  .align 3; \
   test_ ## testnum ## _data: \
   .int val1; \
+  .int 0;\
   .int val2; \
+  .int 0;\
   .int val3; \
+  .int 0;\
   .result; \
+  .int 0;\
   .popsection
 
 #define TEST_FP_HFP_OP_D_H_INTERNAL( testnum, flags, result, val1, val2, val3, code... ) \
@@ -648,9 +656,10 @@ test_ ## testnum: \
   bne a5, a3, fail; \
   bne a1, a4, fail; \
   .pushsection .data; \
-  .align 2; \
+  .align 3; \
   test_ ## testnum ## _data: \
   .int result; \
+  .int 0;\
   .popsection
 
 #-----------------------------------------------------------------------

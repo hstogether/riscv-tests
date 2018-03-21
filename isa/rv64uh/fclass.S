@@ -17,16 +17,29 @@ RVTEST_CODE_BEGIN
   # Arithmetic tests
   #-------------------------------------------------------------
 
-  TEST_FCLASS_H( 2, 1 << 0, 0x0000fc00 )
-  TEST_FCLASS_H( 3, 1 << 1, 0x0000c300 )
-  TEST_FCLASS_H( 4, 1 << 2, 0x00008300 )
-  TEST_FCLASS_H( 5, 1 << 3, 0x00008000 )
-  TEST_FCLASS_H( 6, 1 << 4, 0x00000000 )
-  TEST_FCLASS_H( 7, 1 << 5, 0x00000300 )
-  TEST_FCLASS_H( 8, 1 << 6, 0x00004300 )
-  TEST_FCLASS_H( 9, 1 << 7, 0x00007c00 )
-  TEST_FCLASS_H(10, 1 << 8, 0x00007c01 )
-  TEST_FCLASS_H(11, 1 << 9, 0x00007e00 )
+  # TEST_FCLASS_H( 2, 1 << 0, 0x0000fc00 )
+  # TEST_FCLASS_H( 3, 1 << 1, 0x0000c300 )
+  # TEST_FCLASS_H( 4, 1 << 2, 0x00008300 )
+  # TEST_FCLASS_H( 5, 1 << 3, 0x00008000 )
+  # TEST_FCLASS_H( 6, 1 << 4, 0x00000000 )
+  # TEST_FCLASS_H( 7, 1 << 5, 0x00000300 )
+  # TEST_FCLASS_H( 8, 1 << 6, 0x00004300 )
+  # TEST_FCLASS_H( 9, 1 << 7, 0x00007c00 )
+  # TEST_FCLASS_H(10, 1 << 8, 0x00007c01 )
+  # TEST_FCLASS_H(11, 1 << 9, 0x00007e00 )
+
+  # For 4 way
+  TEST_FCLASS_H( 2, 1 << 0 | 1 << 4, 0x0000fc00 )
+  TEST_FCLASS_H( 3, 1 << 1 | 1 << 4, 0x0000c300 )
+  TEST_FCLASS_H( 4, 1 << 2 | 1 << 4, 0x00008300 )
+  TEST_FCLASS_H( 5, 1 << 3 | 1 << 4, 0x00008000 )
+  TEST_FCLASS_H( 6, 1 << 4 | 1 << 4, 0x00000000 )
+  TEST_FCLASS_H( 7, 1 << 5 | 1 << 4, 0x00000300 )
+  TEST_FCLASS_H( 8, 1 << 6 | 1 << 4, 0x00004300 )
+  TEST_FCLASS_H( 9, 1 << 7 | 1 << 4, 0x00007c00 )
+  TEST_FCLASS_H(10, 1 << 8 | 1 << 4, 0x00007c01 )
+  TEST_FCLASS_H(11, 1 << 9 | 1 << 4, 0x00007e00 )
+
 
   TEST_PASSFAIL
 
