@@ -530,7 +530,7 @@ test_ ## testnum: \
   flh h0, 0(a0); \
   flh h1, 8(a0); \
   flh h2, 16(a0); \
-  lh  a3, 24(a0); \
+  ld  a3, 24(a0); \
   code; \
   fsflags a1, x0; \
   li a2, flags; \
@@ -539,14 +539,10 @@ test_ ## testnum: \
   .pushsection .data; \
   .align 3; \
   test_ ## testnum ## _data: \
-  .int val1; \
-  .int 0;\
-  .int val2; \
-  .int 0;\
-  .int val3; \
-  .int 0;\
+  .dword val1; \
+  .dword val2; \
+  .dword val3; \
   .result; \
-  .int 0;\
   .popsection
 
 #define TEST_FP_HFP_OP_S_H_INTERNAL( testnum, flags, result, val1, val2, val3, code... ) \
@@ -624,7 +620,7 @@ test_ ## testnum: \
                     inst h3, h0; fmv.x.h a0, h3)
 
 #define TEST_FP_OP2_H( testnum, inst, flags, result, val1, val2 ) \
-  TEST_FP_OP_H_INTERNAL( testnum, flags, int result, val1, val2, 0, \
+  TEST_FP_OP_H_INTERNAL( testnum, flags, dword result, val1, val2, 0, \
                     inst h3, h0, h1; fmv.x.h a0, h3)
 
 #define TEST_FP_OP3_H( testnum, inst, flags, result, val1, val2, val3 ) \
